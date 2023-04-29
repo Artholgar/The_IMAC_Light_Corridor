@@ -12,9 +12,13 @@
 /* Camera parameters and functions */
 static const float Z_NEAR = 0.1f;
 static const float Z_FAR = 100.f;
-extern float theta;      // Angle between x axis and viewpoint
-extern float phy  ;      // Angle between z axis and viewpoint
-extern float dist_zoom ; // Distance between origin and viewpoint
+extern float theta;     // Angle between x axis and viewpoint
+extern float phy;       // Angle between z axis and viewpoint
+extern float dist_zoom; // Distance between origin and viewpoint
+
+extern float camera_x;
+extern float camera_y;
+extern float camera_z;
 
 void setCamera();
 

@@ -9,15 +9,16 @@ OBJDIR	= obj/
 
 # Fichiers
 
-OBJ= main.o
+OBJ= $(OBJDIR)main.o $(OBJDIR)3D_tools.o
 EXEC= TILC
 
 # Regles compilation The IMAC Light Corridor
 
 all : app
 
-app : $(OBJDIR)$(OBJ)
-	$(CC) $(CFLAGS) $(OBJDIR)$(OBJ) -o $(BINDIR)$(EXEC) $(LDFLAGS)
+app : $(OBJ)
+	mkdir -p $(BINDIR)
+	$(CC) $(CFLAGS) $(OBJ) -o $(BINDIR)$(EXEC) $(LDFLAGS)
 
 clean :
 	rm -rf *~
