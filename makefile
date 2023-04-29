@@ -3,6 +3,7 @@ CFLAGS	= -Wall -O2 -g
 LDFLAGS	= -lglfw -lGLU -lGL -lm
 
 BINDIR	= bin/
+INCDIR	= inc/
 SRCDIR	= src/
 OBJDIR	= obj/
 
@@ -24,6 +25,6 @@ clean :
 	rm -rf $(OBJDIR)
 	rm -rf $(BINDIR)*
 
-$(OBJDIR)%.o: $(SRCDIR)%.c
+$(OBJDIR)%.o: $(SRCDIR)%.c $(INCDIR)*.h
 	mkdir -p `dirname $@`
-	$(CC) -o $@ -c $< $(CFLAGS)
+	$(CC) -o $@ -I $(INCDIR) -c $< $(CFLAGS)
