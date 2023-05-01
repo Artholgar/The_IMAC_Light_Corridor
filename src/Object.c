@@ -70,7 +70,7 @@ int manageBoingBall(Ball *b, int x, int y, Level lvl)
   {
     moveBallX *= -1;
   }
-  else if (b->x <= camera_x)
+  else if (b->x <= camera_x + 0.1)
   {
     if (b->y <= cursor.y + 0.5 && b->y >= cursor.y - 0.5 && b->z <= cursor.x + 0.5 && b->z >= cursor.x - 0.5)
     {
