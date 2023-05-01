@@ -2,6 +2,7 @@
 #define OBJECT
 
 #include "3D_tools.h"
+#include "corridor.h"
 
 #define MAX_LIFE 5
 
@@ -11,7 +12,6 @@ typedef struct point
   float x;
   float y;
 } Point;
-
 
 typedef struct ball
 {
@@ -30,6 +30,6 @@ void drawBall(Ball b);
 
 void Boing();
 
-int manageBoingBall(Ball *b, int x, int y);
+int manageBoingBall(Ball *b, int x, int y, Level lvl);
 
 #endif

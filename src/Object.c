@@ -1,8 +1,8 @@
 #include "Object.h"
 
-double moveBallX = 0;
+double moveBallX = 0.5;
 double moveBallY = 0;
-double moveBallZ = 0.5;
+double moveBallZ = 0;
 
 /* util function */
 Point ConvertCoord(int x, int y)
@@ -38,7 +38,7 @@ void drawRacket(int x, int y)
 Ball initBall()
 {
   Ball b;
-  b.x = 0.;
+  b.x = 0.1;
   b.y = 0.;
   b.z = 0.;
 
@@ -49,46 +49,79 @@ void drawBall(Ball b)
 {
   glColor3f(0.6, 0.6, 0.8);
   glPushMatrix();
-  glTranslatef(camera_x + 4.95 + b.z, b.y - 0.5, b.x);
+  glTranslatef(b.x, b.y, b.z);
   glScalef(0.5, 0.5, 0.5);
   drawSphere();
   glPopMatrix();
 }
 
-void Boing()
+void Boing(int x, int y, int z)
 {
-  moveBallX *= -1;
-  moveBallY *= -1;
-  moveBallZ *= -1;
+  moveBallX *= x;
+  moveBallY *= y;
+  moveBallZ *= z;
 }
 
-int manageBoingBall(Ball *b, int x, int y)
+int manageBoingBall(Ball *b, int x, int y, Level lvl)
 {
   Point cursor = ConvertCoord(x, y);
 
-  if (b->z >= 20)
+  if (b->x >= (lvl->size * 20.) - 10.)
   {
-    Boing();
+    moveBallX *= -1;
   }
-  else if (b->z + moveBallZ <= -12)
+  else if (b->x <= camera_x)
   {
-    if (b->x + moveBallX >= cursor.x - 0.9 && b->x + moveBallX <= cursor.x + 0.9)
+    if (b->y <= cursor.y + 0.5 && b->y >= cursor.y - 0.5 && b->z <= cursor.x + 0.5 && b->z >= cursor.x - 0.5)
     {
-      if (b->y + moveBallY >= cursor.y - 0.9 && b->y + moveBallX <= cursor.y + 0.9)
-      {
-        moveBallZ *= 1.2;
-        Boing();
-      }
+      moveBallX *= -1;
+      moveBallY = cursor.x - b->z;
+      moveBallZ = cursor.y - b->y;
     }
     else
     {
-      moveBallX = 0;
+      moveBallX = 0.5;
       moveBallY = 0;
-      moveBallZ = 0.5;
+      moveBallZ = 0;
 
+      b->x = 0.1;
+      b->y = 0.;
       b->z = 0.;
 
       return 1;
+    }
+  }
+  else
+  {
+    // Check collision with walls
+    for (CorridorCel cel = lvl->cels; cel != NULL; cel = cel->next)
+    {
+      if (b->x <= cel->offset + 10 && b->x >= cel->offset - 10)
+      {
+        if (b->y >= 10 || b->y <= -10)
+        {
+          moveBallY *= -1;
+        }
+
+        if (b->z >= 10 || b->z <= -10)
+        {
+          moveBallZ *= -1;
+        }
+
+        if (cel->obs != NULL)
+        {
+          if (b->x >= cel->offset - 0.5 && b->x <= cel->offset)
+          {
+            if (b->y >= cel->obs->y - (cel->obs->width / 2) && b->y <= cel->obs->y + (cel->obs->width / 2))
+            {
+              if (b->z >= cel->obs->x - (cel->obs->height / 2) && b->z <= cel->obs->x + (cel->obs->height / 2))
+              {
+                moveBallX *= -1;
+              }
+            }
+          }
+        }
+      }
     }
   }
 

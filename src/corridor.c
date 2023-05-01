@@ -51,6 +51,16 @@ Level genLevel1()
 
     AllocObstacle(&(current->obs), 0, -5, 20, 10);
 
+    current = current->next;
+    current = current->next;
+    current = current->next;
+    current = current->next;
+    current = current->next;
+    current = current->next;
+    current = current->next;
+
+    AllocObstacle(&(current->obs), -5, -5, 10, 10);
+
     return lvl;
 }
 

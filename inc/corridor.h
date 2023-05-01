@@ -1,3 +1,6 @@
+#ifndef CORRIDOR
+#define CORRIDOR
+
 #include "3D_tools.h"
 
 typedef struct obstacle
@@ -29,3 +32,5 @@ Level genLevel1();
 void drawLevel(Level lvl);
 
 void drawCorridorCel(CorridorCel cel);
+
+#endif

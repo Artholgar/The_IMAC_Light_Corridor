@@ -120,12 +120,6 @@ int main(int argc, char **argv)
         /* Get time (in second) at loop beginning */
         double startTime = glfwGetTime();
 
-        glfwGetCursorPos(window, &cursor_x, &cursor_y);
-        looser = manageBoingBall(&b, cursor_x, cursor_y);
-        if (looser == 1){
-          life -= looser;
-        }
-
         /* Cleaning buffers and setting Matrix Mode */
         glClearColor(0.2, 0.0, 0.0, 0.0);
 
@@ -134,6 +128,15 @@ int main(int argc, char **argv)
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         setCamera();
+
+        /* Processing */
+
+        glfwGetCursorPos(window, &cursor_x, &cursor_y);
+        looser = manageBoingBall(&b, cursor_x, cursor_y, lvl1);
+        if (looser == 1)
+        {
+            life -= looser;
+        }
 
         /* Rendering */
 
@@ -148,9 +151,10 @@ int main(int argc, char **argv)
             camera_x += 0.5;
         }
 
-        if (life == 0){
-          printf("Perdu\n");
-          break;
+        if (life == 0)
+        {
+            printf("Perdu\n");
+            break;
         }
 
         /* Swap front and back buffers */
