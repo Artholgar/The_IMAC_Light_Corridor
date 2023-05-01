@@ -12,10 +12,24 @@ typedef struct point
   float y;
 } Point;
 
+
+typedef struct ball
+{
+  float x;
+  float y;
+  float z;
+} Ball;
+
 Point ConvertCoord(int x, int y);
 
 void drawRacket(int x, int y);
 
-void drawBall();
+Ball initBall();
+
+void drawBall(Ball b);
+
+void Boing();
+
+int manageBoingBall(Ball *b, int x, int y);
 
 #endif

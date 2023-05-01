@@ -110,6 +110,9 @@ int main(int argc, char **argv)
     glEnable(GL_DEPTH_TEST);
 
     Level lvl1 = genLevel1();
+    Ball b = initBall();
+    int life = 5;
+    int looser;
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -118,6 +121,10 @@ int main(int argc, char **argv)
         double startTime = glfwGetTime();
 
         glfwGetCursorPos(window, &cursor_x, &cursor_y);
+        looser = manageBoingBall(&b, cursor_x, cursor_y);
+        if (looser == 1){
+          life -= looser;
+        }
 
         /* Cleaning buffers and setting Matrix Mode */
         glClearColor(0.2, 0.0, 0.0, 0.0);
@@ -132,13 +139,18 @@ int main(int argc, char **argv)
 
         drawLevel(lvl1);
 
-        drawBall();
+        drawBall(b);
         drawRacket(cursor_x, cursor_y);
 
         /* process flags */
         if (flag_move_forward)
         {
             camera_x += 0.5;
+        }
+
+        if (life == 0){
+          printf("Perdu\n");
+          break;
         }
 
         /* Swap front and back buffers */
