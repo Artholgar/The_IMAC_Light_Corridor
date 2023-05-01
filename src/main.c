@@ -61,9 +61,6 @@ void onKey(GLFWwindow *window, int key, int scancode, int action, int mods)
         case GLFW_KEY_SPACE:
             flag_move_forward = 1;
             break;
-        case GLFW_KEY_ENTER:
-            camera_x -= 1.;
-            break;
         default:
             fprintf(stdout, "Touche non gérée (%d)\n", key);
         }
