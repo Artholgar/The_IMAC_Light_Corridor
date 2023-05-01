@@ -7,6 +7,7 @@
 #include <math.h>
 #include "3D_tools.h"
 #include "corridor.h"
+#include "Object.h"
 
 /* Window properties */
 static const unsigned int WINDOW_WIDTH = 1000;
@@ -16,6 +17,10 @@ static float aspectRatio = 1.0;
 
 /* Minimal time wanted between two images */
 static const double FRAMERATE_IN_SECONDS = 1. / 30.;
+
+/* Cursor */
+static double cursor_x;
+static double cursor_y;
 
 /* IHM flag */
 static int flag_move_forward = 0;
@@ -33,7 +38,7 @@ void onWindowResized(GLFWwindow *window, int width, int height)
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(60.0, aspectRatio, Z_NEAR, Z_FAR);
+    gluPerspective(60.0, aspectRatio, 10., Z_FAR);
     glMatrixMode(GL_MODELVIEW);
 }
 
@@ -112,6 +117,8 @@ int main(int argc, char **argv)
         /* Get time (in second) at loop beginning */
         double startTime = glfwGetTime();
 
+        glfwGetCursorPos(window, &cursor_x, &cursor_y);
+
         /* Cleaning buffers and setting Matrix Mode */
         glClearColor(0.2, 0.0, 0.0, 0.0);
 
@@ -124,6 +131,9 @@ int main(int argc, char **argv)
         /* Rendering */
 
         drawLevel(lvl1);
+
+        drawBall();
+        drawRacket(cursor_x, cursor_y);
 
         /* process flags */
         if (flag_move_forward)
