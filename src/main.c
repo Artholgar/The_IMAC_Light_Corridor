@@ -38,7 +38,7 @@ void onWindowResized(GLFWwindow *window, int width, int height)
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(60.0, aspectRatio, 10., Z_FAR);
+    gluPerspective(60.0, aspectRatio, 15., Z_FAR);
     glMatrixMode(GL_MODELVIEW);
 }
 
