@@ -9,7 +9,7 @@ OBJDIR	= obj/
 
 # Fichiers
 
-OBJ= $(OBJDIR)main.o $(OBJDIR)3D_tools.o
+OBJ= $(OBJDIR)main.o $(OBJDIR)3D_tools.o $(OBJDIR)corridor.o
 EXEC= TILC
 
 # Regles compilation The IMAC Light Corridor

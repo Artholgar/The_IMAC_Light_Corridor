@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "3D_tools.h"
+#include "corridor.h"
 
 /* Window properties */
 static const unsigned int WINDOW_WIDTH = 1000;
@@ -18,39 +19,6 @@ static const double FRAMERATE_IN_SECONDS = 1. / 30.;
 
 /* IHM flag */
 static int flag_move_forward = 0;
-
-void drawCorridorCel(int nb)
-{
-    float offset = nb * 20.;
-
-    glColor3f(0., 0., 0.9);
-    glPushMatrix();
-    glTranslatef(offset, 0., 10.);
-    glScalef(20., 20., 20.);
-    drawSquare();
-    glPopMatrix();
-
-    glPushMatrix();
-    glTranslatef(offset, 0., -10.);
-    glScalef(20., 20., 20.);
-    drawSquare();
-    glPopMatrix();
-
-    glColor3f(0., 0., 0.4);
-    glPushMatrix();
-    glRotatef(90, 1., 0., 0.);
-    glTranslatef(offset, 0., 10.);
-    glScalef(20., 20., 20.);
-    drawSquare();
-    glPopMatrix();
-
-    glPushMatrix();
-    glRotatef(90, 1., 0., 0.);
-    glTranslatef(offset, 0., -10.);
-    glScalef(20., 20., 20.);
-    drawSquare();
-    glPopMatrix();
-}
 
 /* Error handling function */
 void onError(int error, const char *description)
