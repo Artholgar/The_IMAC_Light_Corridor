@@ -104,6 +104,8 @@ int main(int argc, char **argv)
     glPointSize(5.0);
     glEnable(GL_DEPTH_TEST);
 
+    Level lvl1 = genLevel1();
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -120,8 +122,8 @@ int main(int argc, char **argv)
         setCamera();
 
         /* Rendering */
-        drawCorridorCel(0);
-        drawCorridorCel(1);
+
+        drawLevel(lvl1);
 
         /* process flags */
         if (flag_move_forward)
